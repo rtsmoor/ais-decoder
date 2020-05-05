@@ -26,6 +26,20 @@ class AISserial():
         return data_raw
 
 
+class AISfile():
+    def __init__(self, filename):
+	self.filename = filename
+
+    def write_data(file_data):
+	try:
+	    file = open(self.filename, "a+")
+	    file.write(file_data)
+	    file.write("\n")
+	    file.close()
+	except:
+	    pass
+
+
 class AISjson():
     def __init__(self, url):
         self.request = urllib2.Request(url)
@@ -37,3 +51,4 @@ class AISjson():
         self.request.add_header('Content-Length', len(json_data_bytes))
         response = urllib2.urlopen(self.request, json_data_bytes)
         response.close()
+	return json_data

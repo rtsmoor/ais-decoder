@@ -20,7 +20,6 @@ def decode_ais(message):
 
 def make_json_dict(decoder_id, network_id):
     json_dict = ai.AISdict()
-    
     json_dict.add('decoder_id', decoder_id)
     json_dict.add('network_id', network_id)
     return json_dict
@@ -29,19 +28,19 @@ def make_json_dict(decoder_id, network_id):
 def make_ship_dict(ship_data):
     ship_dict = ai.AISdict()
     location_ship_dict = ai.AISdict()
-    
+
     location_ship_dict.add('latitude', ship_data['lat'])
     location_ship_dict.add('longitude', ship_data['lon'])
     ship_dict.add('location', location_ship_dict)
-    ship_dict.add('course', ship_data['course'])
-    if 'name' in ship_data:
-        ship_dict.add('name', ship_data['name'])
+    if 'course' in ship_data:
+        ship_dict.add('course', ship_data['course'])
     return ship_dict
 
 
 def main():
-    serial = ai.AISserial('/dev/ttyS3')
-    json = ai.AISjson('http://ais.klipper.anothertechproject.com/post')
+    serial = ai.AISserial('/dev/ttyS0')
+    ais_file = ai.AISfile('outputfile.json')
+    json = ai.AISjson('https://api.anothertechproject.com:90/boat')
     json_dict = make_json_dict(1, 'localhost')
     ships_list = []
 
@@ -62,17 +61,16 @@ def main():
                 message = line.rstrip("\n")
                 ship_data = decode_ais(message)
                 if all(key in ship_data for key in ('mmsi', 'lat', 'lon')):
-                    print("decoded:", ship_data['mmsi'])
                     ships_dict.add(ship_data['mmsi'], make_ship_dict(ship_data))
 
                 message = ship_data = None
 
-        print("list:", ships_dict)
         ships_list.append(ships_dict.copy())
         json_dict.add('ships', ships_list)
         tm.sleep(.1)
-        json.post_data(json_dict)
-        ships_dict = {}
+        js_data = json.post_data(json_dict)
+        ais_file.write_data(js_data)
+	ships_dict = {}
         ships_list = []
 
 if __name__ == '__main__':
