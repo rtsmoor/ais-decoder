@@ -129,354 +129,58 @@ def decod_data(data):
 
     def decod_1(data): # Message types 1,2,3
         ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
         ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['status']         = int(data[38:42],2)
-        #ais_data['turn']           = sign_int(data[42:50])
-        #ais_data['speed']          = int(data[50:60], 2)
-        #ais_data['accuracy']       = data[60]
         ais_data['lon']             = sign_int(data[61:89]) / 600000.0
         ais_data['lat']             = sign_int(data[89:116]) / 600000.0
         ais_data['course']         = int(data[116:128],2) * 0.1
-        #ais_data['heading']        = int(data[128:137],2)
-        #ais_data['second']         = int(data[137:143],2)
-        #ais_data['maneuver']       = int(data[143:145],2)
-        #ais_data['raim']           = data[148]
-        #ais_data['radio']          = int(data[149:168], 2)
+
         return ais_data
 
     def decod_4(data):
         ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
         ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['year']           = int(data[38:52], 2)
-        #ais_data['month']          = int(data[52:56], 2)
-        #ais_data['day']            = int(data[56:61], 2)
-        #ais_data['hour']           = int(data[61:66], 2)
-        #ais_data['minute']         = int(data[66:72], 2)
-        #ais_data['second']         = int(data[72:78], 2)
-        #ais_data['accuracy']       = data[78]
         ais_data['lon']             = sign_int(data[79:107]) / 600000.0
         ais_data['lat']             = sign_int(data[107:134]) / 600000.0
-        #ais_data['epfd']           = int(data[134:138], 2)
-        #ais_data['raim']           = data[148]
-        #ais_data['radio']          = int(data[149:168], 2)
+
         return ais_data
 
     def decod_5(data):
         ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
         ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['ais_version']    = int(data[38:40],2)
-        #ais_data['imo']            = int(data[40:70],2)
-        #ais_data['callsign']       = decod_str(data[70:112])
         ais_data['shipname']        = decod_str(data[112:232])
-        ais_data['shiptype']        = int(data[232:240],2)
-        #ais_data['to_bow']         = int(data[240:249],2)
-        #ais_data['to_stern']       = int(data[249:258],2)
-        #ais_data['to_port']        = int(data[258:264],2)
-        #ais_data['to_starboard']   = int(data[264:270],2)
-        #ais_data['epfd']           = int(data[270:274],2)
-        #ais_data['month']          = int(data[274:278],2)
-        #ais_data['day']            = int(data[278:283],2)
-        #ais_data['hour']           = int(data[283:288],2)
-        #ais_data['minute']         = int(data[288:294],2)
-        #ais_data['draught']        = float(int(data[294:302],2)/10)
-        #ais_data['destination']    = decod_str(data[302:422])
-        #ais_data['dte']            = data[422]
-        return ais_data
 
-    def decod_6(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['seqno']          = int(data[38:40],2)
-        #ais_data['dest_mmsi']      = int(data[40:70],2)
-        #ais_data['retransmit']     = data[70]
-        #ais_data['dac']            = int(data[72:82],2)
-        #ais_data['fid']            = int(data[82:88],2)
-        #ais_data['data']           = data[88]
-        return ais_data
-    
-    def decod_7(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['mmsi1']          = int(data[40:70],2)
-        #ais_data['mmsiseq1']       = int(data[70:72],2)
-        #ais_data['mmsi2']          = int(data[72:102],2)
-        #ais_data['mmsiseq2']       = int(data[102:104],2)
-        #ais_data['mmsi3']          = int(data[104:134],2)
-        #ais_data['mmsiseq3']       = int(data[134:136],2)
-        #ais_data['mmsi4']          = int(data[136:166],2)
-        #ais_data['mmsiseq4']       = int(data[166:168],2)
-        return ais_data
-    
-    def decod_8(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['dac']            = int(data[40:50],2)
-        #ais_data['fid']            = int(data[50:56],2)
-        #ais_data['data']           = data[56]
-        return ais_data
-    
-    def decod_9(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['alt']            = int(data[38:50],2)
-        #ais_data['speed']          = int(data[50:60], 2)
-        #ais_data['accuracy']       = data[60]
-        ais_data['lon']             = sign_int(data[61:89]) / 600000.0
-        ais_data['lat']             = sign_int(data[89:116]) / 600000.0
-        ais_data['course']         = int(data[116:128],2) * 0.1
-        #ais_data['second']         = int(data[128:134], 2)
-        #ais_data['dte']            = data[142]
-        #ais_data['assigned']       = data[146]
-        #ais_data['raim']           = data[147]
-        #ais_data['radio']          = int(data[148:168], 2)
-        return ais_data
-    
-    def decod_10(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['dest_mmsi']      = int(data[40:70],2)
-        return ais_data
-    
-    def decod_12(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['seqno']          = int(data[38:40],2)
-        #ais_data['dest_mmsi']      = int(data[40:70],2)
-        #ais_data['retransmit']     = data[70]
-        #ais_data['text']           = decod_str(data[72:930])
-        return ais_data
-    
-    def decod_14(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['text']           = decod_str(data[40:930])
-        return ais_data
-    
-    def decod_15(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['mmsi1']          = int(data[40:70],2)
-        #ais_data['type1_1']        = int(data[70:76],2)
-        #ais_data['offset1_1']      = int(data[76:88],2)
-        #ais_data['type1_2']        = int(data[90:96'],2)
-        #ais_type['offset1_2']      = int(data[96:108],2)
-        #ais_data['mmsi2']          = int(data[110:140],2)
-        #ais_data['type2_1']        = int(data[140:146],2)
-        #ais_data['offset2_1']      = int(data[146:158],2)
-        return ais_data
-    
-    def decod_16(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['mmsi1']          = int(data[40:60],2)
-        #ais_data['offset1']        = int(data[70:82],2)
-        #ais_data['increment1']     = int(data[82:92],2)
-        #ais_data['mmsi2']          = int(data[92:122],2)
-        #ais_data['offset2']        = int(data[122:134],2)
-        #ais_data['increment2']     = int(data[134:144],2)
-        return ais_data
-    
-    def decod_17(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        ais_data['lon']             = sign_int(data[40:58])/600.0
-        ais_data['lat']             = sign_int(data[58:75])/600.0
-        #ais_data['data']           = int(data[80:816],2)
         return ais_data
 
     def decod_18(data):
         ais_data                    = {'type':int(data[0:6],2)}
         ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['repeat']         = int(data[6:8],2)
-        #ais_data['speed']          = int(data[46:56],2)
-        #ais_data['accuracy']       = data[56]
         ais_data['lon']             = sign_int(data[57:85])/600000.0
         ais_data['lat']             = sign_int(data[85:112])/600000.0
         ais_data['course']         = int(data[112:124],2)*0.1
-        #ais_data['heading']        = int(data[124:133],2)
-        #ais_data['second']         = int(data[133:139],2)
-        #ais_data['regional']       = int(data[139:141],2)
-        #ais_data['cs']             = data[141]
-        #ais_data['display']        = data[142]
-        #ais_data['dsc']            = data[143]
-        #ais_data['band']           = data[144]
-        #ais_data['msg22']          = data[145]
-        #ais_data['assigned']       = data[146]
-        #ais_data['raim']           = data[147]
-        #ais_data['radio']          = int(data[148:168],2)
-        return ais_data
 
-    def decod_19(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['speed']          = int(data[46:56],2)
-        #ais_data['accuracy']       = data[56]
-        ais_data['lon']             = sign_int(data[57:85])/600000.0
-        ais_data['lat']             = sign_int(data[85:112])/600000.0
-        #ais_data['course']         = int(data[112:124],2)*0.1
-        #ais_data['heading']        = int(data[124:133],2)
-        #ais_data['second']         = int(data[133:139],2)
-        #ais_data['regional']       = int(data[139:143],2)
-        ais_data['shipname']        = decod_str(data[143:263])
-        #ais_data['to_bow']         = int(data[271:280],2)
-        #ais_data['to_stern']       = int(data[280:288],2)
-        #ais_data['to_port']        = int(data[289:295],2)
-        #ais_data['to_starboard']   = int(data[295:301],2)
-        #ais_data['epfd']           = int(data[301:305],2)
-        #ais_data['raim']           = data[305]
-        #ais_data['dte']            = data[306]
-        #ais_data['assigned']       = data[307]
-        return ais_data
-
-    def decod_20(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['offset1']        = int(data[40:52],2)
-        #ais_data['number1']        = int(data[52:56],2)
-        #ais_data['timeout1']       = int(data[56:59],2)
-        #ais_data['increment1']     = int(data[59:70],2)
-        #ais_data['offset2']        = int(data[70:81],2)
-        #ais_data['number2']        = int(data[82:86],2)
-        #ais_data['timeout2']       = int(data[86:89],2)
-        #ais_data['increment2']     = int(data[89:100],2)
-        #ais_data['offset3']        = int(data[100:112],2)
-        #ais_data['number3']        = int(data[112:116],2)
-        #ais_data['timeout3']       = int(data[116:119],2)
-        #ais_data['increment3']     = int(data[119:139],2)
-        #ais_data['offset4']        = int(data[130:142],2)
-        #ais_data['number4']        = int(data[142:146],2)
-        #ais_data['timeout4']       = int(data[146:149],2)
-        #ais_data['increment4']     = int(data[149:160],2)
-        return ais_data
-
-    def decod_21(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['repeat']         = int(data[6:8],2)
-        #ais_data['aid_type']       = int(data[38:43],2)
-        ais_data['name']            = decod_str(data[43:163])
-        #ais_data['accuracy']       = data[163]
-        ais_data['lon']             = sign_int(data[164:192])/600000.0
-        ais_data['lat']             = sign_int(data[192:219])/600000.0
-        #ais_data['to_bow']         = int(data[219:228],2)
-        #ais_data['to_stern']       = int(data[228:237],2)
-        #ais_data['to_port']        = int(data[237:243],2)
-        #ais_data['to_starboard']   = int(data[243:249],2)
-        #ais_data['epfd']           = int(data[249:253],2)
-        #ais_data['second']         = int(data[253:259],2)
-        #ais_data['off_position']   = data[259]
-        #ais_data['regional']       = int(data[260:268],2)
-        #ais_data['raim']           = data[268]
-        #ais_data['virtual_aid']    = data[269]
-        #ais_data['assigned']       = data[270]
-        ais_data['name_ext']        = decod_str(data[272:361])
-        return ais_data
-    
-    def decod_22(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['channel_a']      = int(data[40:52],2)
-        #ais_data['channel_b']      = int(data[52:63],2)
-        #ais_data['txrx']           = int(data[64:68],2)
-        #ais_data['power']          = data[68]
-        #ais_data['ne_lon']         = sign_int(data[69:87])/60.0
-        #ais_data['ne_lat']         = sign_int(data[87:104])/60.0
-        #ais_data['sw_lon']         = sign_int(data[104:122])/60.0
-        #ais_data['sw_lat']         = sign_int(data[122:139])/60.0
-        #ais_data['dest1']          = int(data[69:99],2)
-        #ais_data['dest2']          = int(data[104:134],2)
-        #ais_data['addressed']      = data[139]
-        #ais_data['band_a']         = data[140]
-        #ais_data['band_b']         = data[141]
-        #ais_data['zonesize']       = int(data[142:145],2)
-        return ais_data
-
-    def decod_23(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['ne_lon']         = sign_int(data[40:58])/60.0
-        #ais_data['ne_lat']         = sign_int(data[58:75])/60.0
-        #ais_data['sw_lon']         = sign_int(data[75:93])/60.0
-        #ais_data['sw_lat']         = sign_int(data[93:110])/60.0
-        ais_data['stationtype']     = int(data[110:114],2)
-        ais_data['shiptype']        = int(data[114:122],2)
-        #ais_data['txrx']           = int(data[144:146],2)
-        #ais_data['interval']       = int(data[146:150],2)
-        #ais_data['quiet']          = int(data[150:154],2)
         return ais_data
 
     def decod_24(data):
         ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
         ais_data['mmsi']            = int(data[8:38],2)
         ais_data['partno']          = int(data[38:40],2)
         if not(ais_data['partno']):
             ais_data['shipname']    = decod_str(data[40:160])
         else:
             ais_data['shiptype']    = int(data[40:48],2)
-        #    ais_data['vendorid']   = int(data[48:66],2)
             ais_data['vendorname']  = decod_str(data[48:90]) #Older models. might be garbage
-        #    ais_data['model']      = int(data[66:70],2)
-        #    ais_data['serial']     = int(data[70:90],2)
-        #    ais_data['callsign']   = decod_str(data[90:132])
-        #    if not(is_auxiliary_craft(ais_data['mmsi'])):
-        #        ais_data['to_bow']       = int(data[132:141],2)
-        #        ais_data['to_stern']     = int(data[141:150],2)
-        #        ais_data['to_port']      = int(data[150:156],2)
-        #        ais_data['to_starboard'] = int(data[156:162],2)
-        #    else:
-        #        ais_data['mothership_mmsi'] = int(data[132:162],2)
         return ais_data
-    
-    def decod_25(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['addressed']      = data[38]
-        #ais_data['structured']     = data[39]
-        return ais_data
-    
-    def decod_27(data):
-        ais_data                    = {'type':int(data[0:6],2)}
-        #ais_data['repeat']         = int(data[6:8],2)
-        ais_data['mmsi']            = int(data[8:38],2)
-        #ais_data['accuracy']       = data[38]
-        #ais_data['raim']           = data[39]
-        #ais_data['status']         = int(data[40:44],2)
-        ais_data['lon']             = sign_int(data[44:62])/600.0
-        ais_data['lat']             = sign_int(data[62:79])/600.0
-        #ais_data['speed']          = int(data[79:85], 2)
-        ais_data['course']         = int(data[85:94],2)
-        #ais_data['gnss']           = data[94]
-        return ais_data
-
 
     decod_type = {                              # list of the ais message type we can decode
        0  : None,       1  : decod_1,   2  : decod_1,
        3  : decod_1,    4  : decod_4,   5  : decod_5,
-       6  : decod_6,    7  : decod_7,   8  : decod_8,
-       9  : decod_9,    10 : decod_10,  11 : decod_4,
-       12 : decod_12,   13 : decod_7,   14 : decod_14,
-       15 : decod_15,   16 : decod_16,  17 : decod_17,
-       18 : decod_18,   19 : decod_19,  21 : decod_21,
-       22 : decod_22,   23 : decod_23,  24 : decod_24,
-       25 : decod_25,   26 : None,      27 : decod_27
+       6  : None,	7  : None,   	8  : None,
+       9  : None,    	10 : None,  	11 : None,
+       12 : None,   	13 : None,   	14 : None,
+       15 : None,   	16 : None,  	17 : None,
+       18 : decod_18,   19 : None,  	21 : None,
+       22 : None,   	23 : None,  	24 : decod_24,
+       25 : None,   	26 : None,      27 : None
     }
     try:
         ais_data = decod_type[type_nb](data)    # try to decode the sentense without assumption of its type
@@ -811,26 +515,8 @@ format_list = {#list of all the key that can be formatted
               'lat'         : format_lat,
               'lon'         : format_lon,
               'course'     : format_course,
-              #'speed'      : format_speed,
-              #'heading'    : format_heading,
-              #'second'     : format_second,
-              #'cs'         : format_cs,
-              #'display'    : format_display,
-              #'dsc'        : format_dsc,
-              #'band'       : format_band,
-              #'msg22'      : format_msg22,
-              #'assigned'   : format_assigned,
-              #'dte'        : format_dte,
-              #'epfd'       : format_epfd,
               'stationtype' : format_stationtype,
               'shiptype'    : format_shiptype,
-              #'month'      : format_month,
-              #'day'        : format_day,
-              #'hour'       : format_hour,
-              #'minute'     : format_minute,
-              #'turn'       : format_turn,
-              #'status'     : format_status,
-              #'aid_type'   : format_aid_type
               }
 
 def format_ais(ais_base):
