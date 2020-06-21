@@ -30,7 +30,7 @@ class AISfile():
     def __init__(self, filename):
 	self.filename = filename
 
-    def write_data(file_data):
+    def write_data(self, file_data):
 	try:
 	    file = open(self.filename, "a+")
 	    file.write(file_data)
@@ -49,6 +49,8 @@ class AISjson():
         json_data = json.dumps(dictionary)
         json_data_bytes = json_data.encode('utf-8')
         self.request.add_header('Content-Length', len(json_data_bytes))
+
         response = urllib2.urlopen(self.request, json_data_bytes)
         response.close()
+
 	return json_data

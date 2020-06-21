@@ -1,3 +1,4 @@
+#! /usr/bin/python
 # program.py
 import ais as ai
 import time as tm
@@ -39,14 +40,15 @@ def make_ship_dict(ship_data):
 
 def main():
     serial = ai.AISserial('/dev/ttyS0')
-    ais_file = ai.AISfile('outputfile.json')
-    json = ai.AISjson('https://api.anothertechproject.com:90/boat')
+    ais_file = ai.AISfile('/home/pi/ais-decoder/outputfile.json')
+    json = ai.AISjson('http://145.24.222.86:90/boat')
     json_dict = make_json_dict(1, 'localhost')
     ships_list = []
 
+    print("Starting")
     while True:
         ships_dict = ai.AISdict()
-        with open('aismsg.nmea', 'w') as file:
+        with open(r"/home/pi/ais-decoder/aismsg.nmea", 'w') as file:
             t_end = tm.time() + 10
             while tm.time() < t_end:
                 message = serial.read_serial()
@@ -56,7 +58,7 @@ def main():
 
         tm.sleep(.1)
 
-        with open('aismsg.nmea', 'r') as file:
+        with open(r"/home/pi/ais-decoder/aismsg.nmea", 'r') as file:
             for line in file:
                 message = line.rstrip("\n")
                 ship_data = decode_ais(message)

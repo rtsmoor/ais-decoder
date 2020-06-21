@@ -536,7 +536,7 @@ def format_lon(lon):
     return float(lon)
 
 def format_course(course):
-    return 'N/A' if course == 3600 else "{:3.1f}°".format(course).zfill(6) #with leading zeroes
+    return 'N/A' if course == 3600 else course #with leading zeroes
 
 def format_speed(speed):
     if speed == 1023:
